@@ -3,7 +3,7 @@ const mysql = require('mysql')
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
-const port = 3000;
+const port = 8000;
 
 const conn = mysql.createConnection({
   host : 'localhost',
@@ -20,7 +20,7 @@ const conn = mysql.createConnection({
 //  })
 //})
 
-//const sql = 'INSERT INTO db_test(id, title, content) VALUES(?, ?, ?)'
+//const sql = 'INSERT INTO db_test VALUES(?, ?, ?)'
 //conn.query(sql, [], (err, row, field) => {
 //  if(err) throw err;
 //  console.log(row);
@@ -34,8 +34,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 
 app.post('/', (req, res) => {
-  res.send(req.body)
-})
+  const sql = "INSERT INTO db_test SET ?"
+
+  conn.query(sql, req.body, function(err, rows, field){
+    if(err) throw err;
+    console.log(rows);
+    res.send('등록완료')
+  });
+});
 
 app.listen(port, () => {
   console.log(`server is running on post... http://localhost:${port}`)
