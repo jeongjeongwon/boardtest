@@ -20,12 +20,6 @@ const conn = mysql.createConnection({
 //  })
 //})
 
-//const sql = 'INSERT INTO db_test VALUES(?, ?, ?)'
-//conn.query(sql, [], (err, row, field) => {
-//  if(err) throw err;
-//  console.log(row);
-//});
-
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 })
@@ -33,15 +27,19 @@ app.get('/', (req, res) => {
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended : true}));
 
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname + '/index.html'))
+})
+
 app.post('/', (req, res) => {
   const sql = "INSERT INTO db_test SET ?"
 
-  conn.query(sql, req.body, function(err, rows, field){
+  conn.query(sql, req.body, (err, row, field) => {
     if(err) throw err;
-    console.log(rows);
-    res.send('등록완료')
-  });
-});
+    console.log(row)
+    res.send('완료')
+  })
+})
 
 app.listen(port, () => {
   console.log(`server is running on post... http://localhost:${port}`)
