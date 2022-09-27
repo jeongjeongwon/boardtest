@@ -12,14 +12,6 @@ const conn = mysql.createConnection({
   database : 'test'
 })
 
-//app.get('/', (req, res) => {
-//  const sql = "select * from db_test"
-//  conn.query(sql, (err, row, field) => {
-//    if(err) throw err;
-//    res.send(row)
-//  })
-//})
-
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 })
