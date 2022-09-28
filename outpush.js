@@ -11,23 +11,16 @@ const con = mysql.createConnection({
   database : 'test'
 })
 
-//function createElementList(list, parent, child){
-//  for(let i = 0; i < list.length; i++){
-//    let create = document.createElement(child)
-//    create.textContent = list[i]
-//    parent.appendChild(create)
-//  }
-//}
-
-//app.get('/', (req, res) => {
-//  const sql = "select * from db_test"
-//  conn.query(sql, (err, row, field) => {
-//    if(err) throw err;
-//    res.send(row)
-//  })
-//})
-
 const settingDOM = () =>{}
+
+const createElementList = (child, parent) => {
+  const sql = "select * from db_test"
+  for(let i = 0; i < sql.length; i++){
+    let create = document.createElement(child)
+    create.textContent = sql[i]
+    parent.appendChild(create)
+  }
+}
 
 const mainPage =
 `<!DOCTYPE html>
@@ -43,6 +36,7 @@ const mainPage =
     <header>
       <h1><a href="http://localhost:8000">글쓰기<a></h1>
     </header>
+    <main>
   </div>
 </body>
 </html>`
@@ -53,3 +47,29 @@ http.createServer((req, res) => {
 }).listen(port, () => {
   console.log(`server start http://localhost:${port}`)
 })
+
+
+
+
+
+
+
+
+
+
+
+//function createElementList(list, parent, child){
+//  for(let i = 0; i < list.length; i++){
+//    let create = document.createElement(child)
+//    create.textContent = list[i]
+//    parent.appendChild(create)
+//  }
+//}
+
+//app.get('/', (req, res) => {
+//  const sql = "select * from db_test"
+//  conn.query(sql, (err, row, field) => {
+//    if(err) throw err;
+//    res.send(row)
+//  })
+//})
