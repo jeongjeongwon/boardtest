@@ -12,7 +12,7 @@ const conn = mysql.createConnection({
   database : 'test'
 })
 
-app.get('/', (req, res) => {
+app.get('/create', (req, res) => {
   res.sendFile(__dirname + '/index.html');
 })
 
@@ -33,7 +33,7 @@ app.post('/', (req, res) => {
   })
 })
 
-app.get('/about', (req, res) => {
+app.get('/', (req, res) => {
   const sql = "select * from db_test"
   conn.query(sql, (err, row) => {
     let a = ""
